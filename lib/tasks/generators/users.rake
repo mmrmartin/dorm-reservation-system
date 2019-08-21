@@ -1,10 +1,12 @@
 namespace :generators do
+<<<<<<< HEAD
         desc "Generate Users"
         task :users => :environment do
             puts "Generating users..."
             File.open("tmp/users.csv", "r").each_line do |line|
                 data = line.split(":")
 
+                begin
                 User.create!(
                       {
                           email: data[0],
@@ -16,6 +18,10 @@ namespace :generators do
                           room_type: data[1]
                       }
                 )
+                rescue
+                  puts "fail for #{data[0]}"
+                  raise
+                end
             end
             puts "Generated successfully"
         end
